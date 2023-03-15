@@ -1,0 +1,78 @@
+
+<div class="row">
+    <div class="column" style="text-align: left;">
+        <h3>Expenses List</h3></div>
+    <div class="column" style="text-align: right;">
+        <button (click)="addExpense(content)" style="margin-right: 10px">Add Expense</button>
+        <button (click)="calculateExpenses(content2)">Settle Up</button>
+    </div>
+</div>
+<div class="padding-30px">
+    <table id="expenses">
+        <tr>
+          <th>Name</th>
+          <th>Expense</th>
+        </tr>
+        <tr *ngFor="let data of myData">
+          <td>{{data?.name}}</td>
+          <td>{{data?.expense}}</td>
+        </tr>
+      </table>
+</div>
+<ng-template #content2 let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" 
+            id="modal-basic-title">
+            Total Expenses
+        </h4>
+        <button type="button" class="close"
+                aria-label="Close" (click)=
+                "modal.dismiss('Cross click')">
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <h5>Total Cost: {{totalExpenses}}</h5>
+        </div>
+    </div>
+</ng-template>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" 
+            id="modal-basic-title">
+            Add New Expense
+        </h4>
+        <button type="button" class="close"
+                aria-label="Close" (click)=
+                "modal.dismiss('Cross click')">
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <label for="dateOfBirth">
+                Date of birth
+            </label>
+            <div class="input-group">
+                <label for="name">Name</label>
+                <input type="text" id="Name"[(ngModel)]="myObject.name">
+            </div>
+            <div class="input-group">
+                <label for="expense">Expense</label>
+                <input type="text"id="expense" placeholder="Expense" [(ngModel)]="myObject.expense">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" [disabled]="myObject.name.length == 0 && myObject.expense == 0"
+            class="btn btn-outline-dark" 
+            (click)="modal.close('Save click'); submit();">
+            Save
+        </button>
+    </div>
+</ng-template>
