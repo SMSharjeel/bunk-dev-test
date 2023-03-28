@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IExpense } from 'src/app/core/interfaces/expenseInterface';
 import { ExpensesService } from 'src/app/core/services/expenses.service';
@@ -44,11 +44,13 @@ export class ExpensesListComponent implements OnInit {
         }
     });
   }
-  submit() {
-    this.expService.postExpense(this.myObject.name, this.myObject.expense).subscribe(d => {
-      if (d.success) {
-        this.myData = d.content;
-      }
-    });
+  saveExpense(myObject: IExpense) {
+    if (myObject) {
+      this.expService.postExpense(myObject.name, myObject.expense).subscribe(d => {
+        if (d.success) {
+          this.myData = d.content;
+        }
+      }); 
+    }
   }
 }

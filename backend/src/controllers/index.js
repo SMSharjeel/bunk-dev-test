@@ -16,15 +16,22 @@ module.exports = {
         });
     },
     postIndex: (req, res) => {
-        let expense = {
-            name: req.body.name,
-            expense: parseFloat(req.body.expense)
-        };
-        expenses.push(expense);
-        res.json({
-            success: true,
-            content: expenses
-        });
+        if (req.body.name.length > 0 && req.body.expense !== undefined) {
+            let expense = {
+                name: req.body.name,
+                expense: parseFloat(req.body.expense)
+            };
+            expenses.push(expense);
+            res.json({
+                success: true,
+                content: expenses
+            });
+        } else {
+            res.json({
+                success: false,
+                content: 'Not Proper Format'
+            })
+        }
     },
     calculateExpenses: (req, res) => {
         let myTotal = 0;

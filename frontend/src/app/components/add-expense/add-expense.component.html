@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h4 class="modal-title" 
+        id="modal-basic-title">
+        Add New Expense
+    </h4>
+    <button type="button" class="close"
+            aria-label="Close" (click)="close()">
+        <span aria-hidden="true">
+            ×
+        </span>
+    </button>
+</div>
+<div class="modal-body">
+    <div>
+        <div class="input-group">
+            <label for="addExpenseInputName">Name</label>
+            <input type="text" id="addExpenseInputName" [(ngModel)]="myObject.name">
+        </div>
+        <div class="input-group">
+            <label for="addExpenseInputExpense">Expense</label>
+            <input type="text" id="addExpenseInputExpense" placeholder="Expense" [(ngModel)]="myObject.expense">
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" [disabled]="myObject.name.length == 0 && myObject.expense == 0"
+        class="btn btn-outline-dark" 
+        (click)="submit()" id="addExpenseSubmitButton">
+        Save
+    </button>
+</div>
